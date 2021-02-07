@@ -1,0 +1,26 @@
+数据库设计
+数据库名称：flower, 包含用户表userInfo、花类型表typename和花的详细信息表flowermessage。
+
+用户信息表UserInfo：
+序号	字段名称	字段说明	数据类型	位数	属性	备注
+1	userId		用户编号	Int		4	非空	主键，自动增长
+2	userName	用户名		varchar		20	非空	
+3	userPwd		用户密码	varchar		32	非空	密码要使用MD5加密
+4       userphone       用户手机        varchar         20      非空
+5       userimage       用户头像        varchar         30      非空    默认
+
+
+花类型表typename
+序号	字段名称	字段说明	类型		位数	属性	备注
+1	TypeId		类型编号	int		4	非空	主键,自动增长列
+2	TypeName	类型名称	varchar		10	非空		
+
+
+花的详细信息表newMessage：
+序号	字段名称	字段说明	类型		位数	属性	备注
+1	Id		花编号	        int		4	非空	主键，自动增长
+2	Title		标题		varchar		50	非空	
+3	TypeId		花类别	        int		4	非空	外键，引用表newType的TypeId字段
+4	price		价格    	varchar  	10	非空	
+5	flower_image	花图片   	varchar		30      非空		
+6	text		详情内容	varchar		200	非空
