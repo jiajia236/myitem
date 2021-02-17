@@ -7,9 +7,17 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "axios": "^0.21.1",
+    "cookie-parser": "^1.4.5",
     "core-js": "^3.6.5",
     "express": "^4.17.1",
+    "md5": "^2.3.0",
+    "mint-ui": "^2.2.13",
+    "moment": "^2.29.1",
     "mysql": "^2.18.1",
+    "qs": "^6.9.6",
+    "svg-captcha": "^1.4.0",
+    "vant": "^2.12.6",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0",
     "vuex": "^3.4.0"
@@ -19,6 +27,7 @@
     "@vue/cli-plugin-router": "~4.5.0",
     "@vue/cli-plugin-vuex": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
+    "babel-plugin-import": "^1.13.3",
     "vue-template-compiler": "^2.6.11"
   },
   "browserslist": [
