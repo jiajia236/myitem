@@ -30,8 +30,8 @@ export default {
 
         let obj={
           uname:this.user.uname,
-          addproduct:this.addProduct==null?'':JSON.stringify(this.addProduct),
-          orderinfo:this.orderInfo==null?'':JSON.stringify(this.orderInfo)
+          addproduct:this.addProduct==null?undefined:JSON.stringify(this.addProduct),
+          orderinfo:this.orderInfo==null?undefined:JSON.stringify(this.orderInfo)
         }
         // console.log(obj);
         this.axios.post("/update",this.qs.stringify(obj)).then(result=>{
