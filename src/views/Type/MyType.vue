@@ -17,7 +17,7 @@
        <mt-tab-container-item>
         <div class="floor">
           <div class="d-flex smdad">
-            <div class="common smfloor" v-for="(elem,i) of product" :key="i">
+            <div class="common smfloor" v-for="(elem,i) of product" :key="i" @click="godetails(elem.pid)">
               <div class="pimg2"><img :src="elem.pimg"></div>
               <p v-cloak class="ptitle">{{elem.ptitle}}·{{elem.pintro}}</p>
               <p class="pprice" v-cloak>￥{{elem.pprice}}</p>
@@ -49,6 +49,9 @@ export default {
     }
   },
   methods:{
+    godetails(pid){
+      this.$router.push(`/details/${pid}`);
+    },
     goindex(){
      this.$router.push("/");
     },
