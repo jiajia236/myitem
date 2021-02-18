@@ -12,7 +12,7 @@
     </div>
     <ul class="list common">
       <li v-for="elem of list" :key="elem.TypeId">
-        <router-link :to="`/type/${elem.TypeId<4?elem.TypeId:elem.TypeId-4}`">
+        <router-link :to="`/type/${elem.TypeId<5?elem.TypeId:elem.TypeId-4}`">
           <img v-lazy="elem.TypeImg">
           <p v-text="elem.TypeName"></p>
         </router-link>
