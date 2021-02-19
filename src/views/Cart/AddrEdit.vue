@@ -30,6 +30,11 @@ export default {
     onSave(e) {
       // Toast('save');
       console.log(e);
+      if(e.isDefault){
+        this.orderInfo.forEach((elem)=>{
+          elem.isDefault=false;
+        })
+      }
       this.setOrderInfo(e);
       this.$toast("保存成功");
       this.$router.push("/addrlist");
