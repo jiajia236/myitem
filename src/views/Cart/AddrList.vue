@@ -23,7 +23,7 @@ export default {
   data(){
     return {
       list:[],
-      chosenAddressId:'1',
+      chosenAddressId:'',
       disabledList: [
         {
           id: '3',
@@ -49,6 +49,9 @@ export default {
         this.list.push(obj);
         if(elem.isDefault){
           this.chosenAddressId=`${i+1}`;
+        }else{
+          this.chosenAddressId='1';
+          // this.orderInfo[0].isDefault=true;
         }
       })
     }

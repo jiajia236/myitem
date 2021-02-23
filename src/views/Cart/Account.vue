@@ -107,23 +107,40 @@ export default {
     payupwd(){
       if(this.payupwd.length===6){
         this.$indicator.open("加载中");
-          let timer=setTimeout(()=>{
-            if(this.payupwd==123456){
-              this.$toast({
-                message:"支付成功",
+        let timer=setTimeout(()=>{
+          if(this.payupwd==123456){
+              // this.addProduct.forEach((elem)=>{
+              //   elem.pnumber-=elem.pcount;
+              //   if(elem.pnumber==0){
+              //     elem.pstatus=0
+              //   }
+              //   let obj={
+              //     pnumber:elem.pnumber,
+              //     pstatus:elem.pstatus,
+              //     pid:elem.pid
+              //   }
+              //   this.axios.post("/updatepro",this.qs.stringify(obj)).then(result=>{
+              //     console.log(result.data);
+              //   })
+              // })
+              this.minuspcount().then(()=>{
+                this.$toast({
+                  message:"支付成功",
                 });
                 sessionStorage.removeItem("addProduct");
                 localStorage.removeItem("addProduct");
                 this.clearaddProduct();
-              this.$router.push("/cart");
+                this.$router.push("/cart");
+                this.$indicator.close();
+              })
             }else{
               this.$toast({
                 message:"支付密码不正确",
               });
             }
             clearTimeout(timer);
-            this.$indicator.close();
           },2000)
+            
       }
       
     }
@@ -131,6 +148,27 @@ export default {
 
   methods:{
     ...mapMutations(["clearaddProduct"]),
+    minuspcount(){
+      return new Promise((resolve,reject)=>{
+        this.addProduct.forEach((elem)=>{
+        elem.pnumber-=elem.pcount;
+        if(elem.pnumber==0){
+          elem.pstatus=0
+        }
+        let obj={
+          pnumber:elem.pnumber,
+          pstatus:elem.pstatus,
+          pid:elem.pid
+        }
+        this.axios.post("/updatepro",this.qs.stringify(obj)).then(result=>{
+          // console.log(result.data);
+        })
+      })
+      resolve();
+
+    })
+      
+    },
     gopay(){
       // console.log(this.radio);
       this.pay=false;

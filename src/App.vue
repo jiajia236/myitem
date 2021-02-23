@@ -7,9 +7,17 @@
   </div>
 </template>
 <script>
+import { mapMutations, mapState } from 'vuex';
+
 export default {
   data(){
     return{transitionName:""}
+  },
+  computed:{
+    ...mapState(["addProduct","orderInfo","user"])
+  },
+  methods:{
+    ...mapMutations(["logout"])
   },
   //在路由发生变化时监听是前进还是后退状态，应用不同动画
  watch: {

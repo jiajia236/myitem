@@ -16,7 +16,6 @@ import Account from '../views/Cart/Account'
 import AddrList from '../views/Cart/AddrList'
 import AddrEdit from '../views/Cart/AddrEdit'
 import AddrUpdate from '../views/Cart/AddrUpdate'
-import Pay from '../views/Cart/Pay'
 
 
 
@@ -29,11 +28,6 @@ VueRouter.prototype.push = function push(location) {
 
 
 const routes = [
-  {
-    path:"/pay",
-    component:Pay,
-    meta:{index:7}
-  },
   {
     path:"/addrupdate/:i",
     component:AddrUpdate,

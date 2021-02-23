@@ -20,7 +20,7 @@ import { mapMutations, mapState } from 'vuex';
 import Area from '../../assets/js/area.js'
 export default {
   computed:{
-    ...mapState(["orderInfo"])
+    ...mapState(["orderInfo","user"])
   },
   methods:{
     ...mapMutations(["setOrderInfo"]),
@@ -30,9 +30,28 @@ export default {
     onSave(e) {
       // Toast('save');
       console.log(e);
+        if(this.orderInfo==null){
+          e.isDefault=true;
+        }else{
+          if(e.isDefault){
+            this.orderInfo.forEach((elem)=>{
+              elem.isDefault=false;
+            })
+          }
+        }
+      
       this.setOrderInfo(e);
-      this.$toast("保存成功");
-      this.$router.push("/addrlist");
+      let obj={
+          uname:this.user.uname,
+          orderinfo:this.orderInfo==null?undefined:JSON.stringify(this.orderInfo)
+        }
+      this.axios.post("/update",this.qs.stringify(obj)).then(result=>{
+        console.log(result.data);
+        if(result.data.code===200){
+          this.$toast("保存成功");
+          this.$router.push("/addrlist");
+        }
+      });
     },
     onChangeDetail(val) {
       if (val) {

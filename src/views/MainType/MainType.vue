@@ -57,7 +57,7 @@ export default {
 .maintype{
   background-color: #fff;
   width: 100%;
-  padding-bottom:20rem; 
+  padding-bottom:10rem; 
 }
 .maintype .van-sidebar-item--select::before{
   background-color: rgb(255,155,77);

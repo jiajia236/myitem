@@ -7,7 +7,10 @@
         <div class="cimg"><img :src="elem.pimg" alt=""></div>
         <div class="proinfo">
           <p>[{{elem.ptitle}}] {{elem.pintro}}</p>
-          <img src="/img/cart/delete.png" class="del" @click="del(elem.pid)">
+          <div class="zhongjian">
+            <p v-if="elem.pnumber<10">仅剩<span style="color:red;" >{{elem.pnumber}}</span>件!!</p>
+            <img src="/img/cart/delete.png" class="del" @click="del(elem.pid)">
+          </div>
           <div class="pprice">
             <p>￥{{(elem.pprice*elem.pcount).toFixed(2)}}</p>
             <van-stepper v-model="elem.pcount" theme="round" button-size="22" @change="change(elem.pcount,elem.pid)" disable-input/>
@@ -38,8 +41,26 @@ export default {
   },
   methods:{
     ...mapMutations(["getCartPro","setCartPro","deladdProduct"]),
+    prest(){
+      let count=0;
+      this.addProduct.forEach(elem=>{
+        if(elem.pnumber<elem.pcount){
+          count++;
+          this.$notify(`商品${elem.ptitle}数量不够了哟`)
+          return;
+        }
+      })
+      if(count>0){
+        return false;
+      }else{
+        return true;  
+      }
+      
+    },
     onSubmit(){
-      this.$router.push("/account");
+      if(this.prest()){
+        this.$router.push("/account");
+      }
     },
     // get(checked){
     //   console.log(checked);
@@ -89,7 +110,7 @@ export default {
   }
   .cart .del{
     width:1.5rem;
-    margin-top:1rem;
+    /* margin-top:1rem; */
     position: absolute;
     right:1rem;
   }
@@ -116,7 +137,14 @@ export default {
     justify-content: space-between;
     color:rgb(255,155,77);
     font-size:1.2rem;
-    margin-top:60px;
-
+    margin-top:30px;
+  }
+  .cart .zhongjian{
+    position:relative;
+    display:flex;
+    height:24px;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:1rem;
   }
 </style>

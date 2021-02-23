@@ -7,7 +7,7 @@
       <p class="ptitle">{{product.ptitle}}</p>
       <div v-html="product.pdetails"></div>
     </div> 
-    <van-goods-action>
+    <van-goods-action v-if="product.pstatus">
       <van-goods-action-icon icon="chat-o" text="客服" color="#ee0a24" />
       <van-goods-action-icon icon="cart-o" text="购物车" @click="gocart()"/>
       <van-goods-action-icon icon="star" text="收藏"  @click="change()" v-if="!collect"/>
@@ -15,6 +15,10 @@
       <van-goods-action-button type="warning" text="加入购物车" @click="isLogin?addPro():goLogin()" />
       <van-goods-action-button type="danger" text="立即购买" />
     </van-goods-action>
+    <van-goods-action class="xiajia" v-else>
+      <div>该商品已下架</div>
+    </van-goods-action>
+
   </div>
 </template>
 <script>
@@ -46,7 +50,8 @@ export default {
         pprice:this.product.pprice,
         pcount:this.product.pcount,
         pid:this.product.pid,
-        pimg:this.product.pimg
+        pimg:this.product.pimg,
+        pnumber:this.product.pnumber
       }
       this.getCartPro(obj);
     },
@@ -114,5 +119,11 @@ export default {
   font-weight: bolder;
   text-align: center;
   margin-top:10px;
+}
+.details .xiajia{
+  background-color:#666;
+  opacity: .8;
+  color:#fff;
+  justify-content: space-around;
 }
 </style>

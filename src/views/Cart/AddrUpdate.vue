@@ -24,7 +24,7 @@ import Area from '../../assets/js/area.js'
 export default {
   props:["i"],
   computed:{
-    ...mapState(["orderInfo"])
+    ...mapState(["orderInfo","user"])
   },
   methods:{
     ...mapMutations(["upOrderInfo","delAddr"]),
@@ -41,14 +41,33 @@ export default {
         });
       }
       this.upOrderInfo({i:this.i,e});
-      this.$toast("保存成功");
-      this.$router.push("/addrlist");
+      let obj={
+          uname:this.user.uname,
+          orderinfo:this.orderInfo==null?undefined:JSON.stringify(this.orderInfo)
+        }
+      this.axios.post("/update",this.qs.stringify(obj)).then(result=>{
+        console.log(result.data);
+        if(result.data.code===200){
+          this.$toast("保存成功");
+          this.$router.push("/addrlist");
+        }
+      });
     },
     onDelete() {
       // Toast('delete');
       // console.log(e);
       this.delAddr(this.i);
-      this.$router.push("/addrList");
+      let obj={
+          uname:this.user.uname,
+          orderinfo:this.orderInfo==null?undefined:JSON.stringify(this.orderInfo)
+        }
+      this.axios.post("/update",this.qs.stringify(obj)).then(result=>{
+        console.log(result.data);
+        if(result.data.code===200){
+          this.$toast("删除成功");
+          this.$router.push("/addrlist");
+        }
+      });
     },
     onChangeDetail(val) {
       if (val) {

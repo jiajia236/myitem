@@ -1,10 +1,16 @@
 const express=require('express');
 const bodyParser=require('body-parser');
 const md5=require('md5');
+const cors=require('cors');
 // const svgCaptcha=require('svg-captcha');
 // const cookieParser=require("cookie-parser");
+
 const app=express();
 app.listen(3000);
+
+app.use(cors({
+  origin: ['http://localhost:9528', 'http://127.0.0.1:9528']
+}));
 
 
 const mysql =require('mysql');
@@ -21,15 +27,29 @@ const pool=mysql.createPool({
 // app.use(cookieParser);
 app.use(bodyParser.urlencoded({extended:false}));
 
-app.get("/ceshi",(req,res)=>{
-  pool.query("select * from userInfo",(err,result)=>{
-    if(err) throw err;
-    res.send(result);
-  });
-}); 
 
 ////////////////////////////////////////////////////
 //lijiajun
+
+app.post("/adminlog",(req,res)=>{
+  let username=req.body.username;
+  let password=req.body.password;
+  pool.query("select uaid from Useradmin where username=? and password=?",[username,password],(err,result)=>{
+    if(err) throw err;
+    res.send(result);
+  });
+});
+
+app.get("/userlist",(req,res)=>{
+  let page=req.query.page;
+  let limit=Number(req.query.limit);
+  let offset=(page-1)*limit;
+  pool.query("select uid,nickname,sex,birthday,orderinfo from UserInfo limit ?,?",[offset,limit],(err,result)=>{
+    if(err) throw err;
+    res.send(result);
+  });
+});
+
 app.post("/reg",(req,res)=>{
   let uname=req.body.uname;
   let upwd=req.body.upwd;
@@ -67,6 +87,16 @@ app.post("/login",(req,res)=>{
       res.send({code:201,msg:"no"});
     }
   });
+});
+
+app.get("/list",(req,res)=>{
+	let page=req.query.page;
+	let limit=Number(req.query.limit);
+	let offset=(page-1)*limit;
+	pool.query("select pstatus,pnumber,pid,ptitle,pprice,pimg,pintro,pnumber,pstatus from jjproduct limit ?,?",[offset,limit],(err,result)=>{
+		if(err) throw err;
+		res.send(result);
+	});
 });
 
 app.post("/update",(req,res)=>{
@@ -134,7 +164,7 @@ app.get("/product",(req,res)=>{
 
 app.get("/details",(req,res)=>{
   let pid=req.query.pid;
-  pool.query("select pid,pcount,ptitle,pdetails,pprice,pimg,pintro from jjproduct where pid=?",[pid],(err,result)=>{
+  pool.query("select pid,pnumber,pstatus,pcount,ptitle,pdetails,pprice,pimg,pintro from jjproduct where pid=?",[pid],(err,result)=>{
     console.log(result);
     if(err) throw err;
     res.send(result);
@@ -153,6 +183,33 @@ app.get("/maintype",(req,res)=>{
   });
  
 });
+
+app.post("/updatepro",(req,res)=>{
+  let pid=req.body.pid;
+  console.log(req.body);
+  pool.query("update jjproduct set ? where pid=?",[req.body,pid],(err,result)=>{
+    if(err) throw err;
+    if(result.affectedRows>0){
+      res.send({code:200,msg:"ok"});
+    }else{
+      res.send({code:201,msg:"no"});
+    }
+  })
+});
+
+app.post("/deletepro",(req,res)=>{
+  let pid=req.body.pid;
+  console.log(pid);
+  pool.query("delete from jjproduct where pid=?",[pid],(err,result)=>{
+	if(err) throw err;
+	if(result.affectedRows>0){
+		res.send({code:200,msg:"del ok"});
+	}else{
+		res.send({code:201,msg:"del fail"});
+	}
+  })
+});
+
 ////////////////////////////////////////////////
 
 
