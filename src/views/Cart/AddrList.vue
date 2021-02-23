@@ -51,7 +51,10 @@ export default {
           this.chosenAddressId=`${i+1}`;
         }else{
           this.chosenAddressId='1';
+<<<<<<< HEAD
           // this.orderInfo[0].isDefault=true;
+=======
+>>>>>>> 4da0259eba4ca20b6e41b21b65ece0d739cf06db
         }
       })
     }

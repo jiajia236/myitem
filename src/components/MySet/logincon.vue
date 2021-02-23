@@ -31,7 +31,11 @@ export default {
         let obj={
           uname:this.user.uname,
           addproduct:this.addProduct==null?undefined:JSON.stringify(this.addProduct),
+<<<<<<< HEAD
           // orderinfo:this.orderInfo==null?undefined:JSON.stringify(this.orderInfo)
+=======
+          orderinfo:this.orderInfo==null?undefined:JSON.stringify(this.orderInfo)
+>>>>>>> 4da0259eba4ca20b6e41b21b65ece0d739cf06db
         }
         // console.log(obj);
         this.axios.post("/update",this.qs.stringify(obj)).then(result=>{
