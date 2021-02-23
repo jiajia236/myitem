@@ -31,6 +31,13 @@ app.use(bodyParser.urlencoded({extended:false}));
 ////////////////////////////////////////////////////
 //lijiajun
 
+app.get("/userrole",(req,res)=>{
+  pool.query("select urid,urname,urremark from Userrole",(err,result)=>{
+    if(err) throw err;
+    res.send(result);
+  });
+});
+
 app.post("/adminlog",(req,res)=>{
   let username=req.body.username;
   let password=req.body.password;

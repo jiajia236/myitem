@@ -13,36 +13,38 @@ use flower;
 #####################################
 #lijiajun
 
-#创建数据表Useradmin
-create table Useradmin(
-  uaid int primary key auto_increment,
-  username varchar(11) not null unique,
-  password varchar(16) not null,
-  ur_id smallint unsigned,
-  foreign key(ur_id) references Userrole(urid);
-);
-
-#插入数据
-insert into Useradmin values(null,'admin','123456');
-insert into Useradmin values(null,'editor','123456');
-insert into Useradmin values(null,'admin3','123456');
-insert into Useradmin values(null,'admin4','123456');
-
 #创建角色表Userrole
 create table Userrole(
   urid smallint unsigned primary key auto_increment,
   urname varchar(15) not null unique,
-  urremark varchar(50),
+  urremark varchar(50)
   -- urrouter varchar(500)
 );
 #插入数据
 insert into Userrole values(null,"超级管理员","可管理所有权限");
 insert into Userrole values(null,"管理员","可管理部分权限");
 
-#创建数据表Userquanxian
-create table Userquanxian(
-  uqid smallint unsigned primary key auto_increment,
+#创建数据表Useradmin
+create table Useradmin(
+  uaid int primary key auto_increment,
+  username varchar(11) not null unique,
+  password varchar(16) not null,
+  ur_id smallint unsigned,
+  foreign key(ur_id) references Userrole(urid)
 );
+
+#插入数据
+insert into Useradmin values(null,'admin','123456',1);
+insert into Useradmin values(null,'editor','123456',2);
+insert into Useradmin values(null,'admin3','123456',null);
+insert into Useradmin values(null,'admin4','123456',null);
+
+
+
+-- #创建数据表Userquanxian
+-- create table Userquanxian(
+--   uqid smallint unsigned primary key auto_increment,
+-- );
 
 #创建数据表UserInfo
 create table UserInfo(
