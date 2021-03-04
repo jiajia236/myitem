@@ -2,8 +2,8 @@
   <div>
     <div class="common cartPro">
       <div v-for="(elem) of addProduct" :key="elem.pid">
-        <!-- <check-btn :checkall="checkall"></check-btn> -->
-        <van-checkbox checked-color="rgb(255,155,77)" class="checkone" @click="check()" v-model="checked"></van-checkbox>
+        <check-btn :checkall="checkall" @zdy="shijian($event)"></check-btn>
+        <!-- <van-checkbox checked-color="rgb(255,155,77)" class="checkone" @click="check()" v-model="checked"></van-checkbox> -->
         <div class="cimg"><img :src="elem.pimg" alt=""></div>
         <div class="proinfo">
           <p>[{{elem.ptitle}}] {{elem.pintro}}</p>
@@ -21,7 +21,6 @@
           你的收货地址不支持同城送, <span @click="onClickEditAddress">修改地址</span>
         </template> -->
         </van-submit-bar>
-
       </div>
     </div>
   </div>
@@ -41,6 +40,11 @@ export default {
   },
   methods:{
     ...mapMutations(["getCartPro","setCartPro","deladdProduct"]),
+    shijian(bool){
+      this.checkall=bool;
+      // console.log(bool);
+      // console.log(zhi);
+    },
     prest(){
       let count=0;
       this.addProduct.forEach(elem=>{

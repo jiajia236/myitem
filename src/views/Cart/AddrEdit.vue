@@ -30,7 +30,6 @@ export default {
     onSave(e) {
       // Toast('save');
       console.log(e);
-<<<<<<< HEAD
         if(this.orderInfo==null){
           e.isDefault=true;
         }else{
@@ -41,13 +40,6 @@ export default {
           }
         }
       
-=======
-      if(e.isDefault){
-        this.orderInfo.forEach((elem)=>{
-          elem.isDefault=false;
-        })
-      }
->>>>>>> 4da0259eba4ca20b6e41b21b65ece0d739cf06db
       this.setOrderInfo(e);
       let obj={
           uname:this.user.uname,

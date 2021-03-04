@@ -131,13 +131,13 @@ export default {
                 localStorage.removeItem("addProduct");
                 this.clearaddProduct();
                 this.$router.push("/cart");
-                this.$indicator.close();
               })
             }else{
               this.$toast({
                 message:"支付密码不正确",
               });
             }
+            this.$indicator.close();
             clearTimeout(timer);
           },2000)
             

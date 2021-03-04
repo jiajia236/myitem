@@ -1,5 +1,5 @@
 <template>
-  <van-checkbox checked-color="rgb(255,155,77)" class="checkone" @click="check()"></van-checkbox>
+  <van-checkbox @click="changecheckall" v-model="checked" checked-color="rgb(255,155,77)" class="checkone"></van-checkbox>
 </template>
 <script>
 export default {
@@ -8,13 +8,16 @@ export default {
   },
   props:["checkall"],
   methods:{
-    check(){
-   
+    changecheckall(){
+      if(!this.checked){
+        this.$emit("zdy",this.checked);
+      }
+    }
+  },
+  watch:{
+    checkall(){
+      this.checked=this.checkall;
     },
-    send(){
-      this.$emit("getchecked",this.checked);
-    },
-    
   }
 }
 </script>

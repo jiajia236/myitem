@@ -17,12 +17,19 @@ use flower;
 create table Userrole(
   urid smallint unsigned primary key auto_increment,
   urname varchar(15) not null unique,
-  urremark varchar(50)
+  urremark varchar(50),
+  urstatus tinyint unsigned not null
   -- urrouter varchar(500)
 );
 #插入数据
-insert into Userrole values(null,"超级管理员","可管理所有权限");
-insert into Userrole values(null,"管理员","可管理部分权限");
+insert into Userrole values(null,"超级管理员","可管理所有权限",1);
+insert into Userrole values(null,"管理员","可管理部分权限",1);
+insert into Userrole values(null,"测试角色1",null,1);
+insert into Userrole values(null,"测试角色2",null,1);
+insert into Userrole values(null,"测试角色3",null,1);
+insert into Userrole values(null,"测试角色4",null,1);
+
+
 
 #创建数据表Useradmin
 create table Useradmin(
@@ -36,15 +43,38 @@ create table Useradmin(
 #插入数据
 insert into Useradmin values(null,'admin','123456',1);
 insert into Useradmin values(null,'editor','123456',2);
-insert into Useradmin values(null,'admin3','123456',null);
-insert into Useradmin values(null,'admin4','123456',null);
+insert into Useradmin values(null,'admin3','123456',3);
+insert into Useradmin values(null,'admin4','123456',4);
+insert into Useradmin values(null,'admin5','123456',5);
+insert into Useradmin values(null,'admin6','123456',6);
 
 
 
--- #创建数据表Userquanxian
--- create table Userquanxian(
---   uqid smallint unsigned primary key auto_increment,
--- );
+#创建数据表userpower
+create table userpower(
+  upid smallint unsigned primary key auto_increment,
+  upname varchar(8) not null unique,
+  uplevel tinyint unsigned not null,
+  uppath varchar(10) not null
+);
+
+#插入数据
+insert into userpower values(null,"商品管理",0,"ceshi");
+insert into userpower values(null,"订单管理",0,"ceshi");
+insert into userpower values(null,"权限管理",0,"ceshi");
+insert into userpower values(null,"商品列表",1,"ceshi");
+insert into userpower values(null,"添加商品",2,"ceshi");
+insert into userpower values(null,"订单列表",1,"ceshi");
+insert into userpower values(null,"添加订单",2,"ceshi");
+insert into userpower values(null,"角色列表",1,"ceshi");
+insert into userpower values(null,"添加角色",2,"ceshi");
+insert into userpower values(null,"删除商品",2,"ceshi");
+insert into userpower values(null,"修改商品",2,"ceshi");
+
+
+
+
+
 
 #创建数据表UserInfo
 create table UserInfo(

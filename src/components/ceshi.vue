@@ -1,0 +1,26 @@
+<template>
+  <div>123</div>
+</template>
+<script>
+export default {
+  data(){
+    return{}
+  },
+  mounted(){
+    this.axios.get("/list").then(result=>{
+      console.log(result.data);
+    })
+    this.axios.post("/ceshilog",{uname:123,upwd:123}).then(result=>{
+      console.log(result.data);
+    })
+    this.axios.get("/ceshiparams",{
+      params:{
+        canshu1:1,
+        canshu2:2
+      }
+    }).then(result=>{
+      console.log(result.data);
+    });
+  }
+}
+</script>

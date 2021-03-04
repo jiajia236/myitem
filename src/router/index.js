@@ -16,7 +16,7 @@ import Account from '../views/Cart/Account'
 import AddrList from '../views/Cart/AddrList'
 import AddrEdit from '../views/Cart/AddrEdit'
 import AddrUpdate from '../views/Cart/AddrUpdate'
-
+import Ceshi from '../components/ceshi'
 
 
 const originalPush = VueRouter.prototype.push
@@ -28,6 +28,10 @@ VueRouter.prototype.push = function push(location) {
 
 
 const routes = [
+  {
+    path:"/ceshi",
+    component:Ceshi
+  },
   {
     path:"/addrupdate/:i",
     component:AddrUpdate,

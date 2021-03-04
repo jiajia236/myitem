@@ -25,8 +25,8 @@ export default {
     //  console.log(to);
     //  console.log(from);
     if(
-      (to.path==="/" || to.path==="/myinfo" || to.path==="/maintype" || to.path==="/cart")  && 
-      (from.path==="/myinfo" || from.path==="/" || from.path==="/maintype" || from.path==="/cart")
+        (to.path==="/" || to.path==="/myinfo" || to.path==="/maintype" || to.path==="/cart")  && 
+        (from.path==="/myinfo" || from.path==="/" || from.path==="/maintype" || from.path==="/cart")
       ){
       this.transitionName="";
     }else{
